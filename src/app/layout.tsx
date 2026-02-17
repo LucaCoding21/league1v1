@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "LEAGUE 1V1 | Where Hoops Meet Combat",
+  title: "LEAGUE 1V1 | Prove It On The Court",
   description:
     "League 1V1 — 1-on-1 basketball with weight classes and tournament-style competition. The ultimate proving ground.",
   keywords: ["basketball", "1v1", "league", "tournament", "combat", "sports"],
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "LEAGUE 1V1 | Where Hoops Meet Combat",
+    title: "LEAGUE 1V1 | Prove It On The Court",
     description:
       "1-on-1 basketball with weight classes and tournament-style competition. The ultimate proving ground.",
     siteName: "League 1V1",
@@ -39,13 +39,13 @@ export const metadata: Metadata = {
         url: "/league1v1.png",
         width: 1200,
         height: 630,
-        alt: "League 1V1 - Where Hoops Meet Combat",
+        alt: "League 1V1 - Prove It On The Court",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LEAGUE 1V1 | Where Hoops Meet Combat",
+    title: "LEAGUE 1V1 | Prove It On The Court",
     description:
       "1-on-1 basketball with weight classes and tournament-style competition.",
     images: ["/league1v1.png"],
