@@ -24,19 +24,31 @@ export const metadata: Metadata = {
   description:
     "League 1V1 — 1-on-1 basketball with weight classes and tournament-style competition. The ultimate proving ground.",
   keywords: ["basketball", "1v1", "league", "tournament", "combat", "sports"],
-  metadataBase: new URL("https://league1v1.com"),
+  metadataBase: new URL("https://league1v1.vercel.app"),
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     title: "LEAGUE 1V1 | Where Hoops Meet Combat",
     description:
       "1-on-1 basketball with weight classes and tournament-style competition. The ultimate proving ground.",
     siteName: "League 1V1",
     type: "website",
+    images: [
+      {
+        url: "/league1v1.png",
+        width: 1200,
+        height: 630,
+        alt: "League 1V1 - Where Hoops Meet Combat",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "LEAGUE 1V1 | Where Hoops Meet Combat",
     description:
       "1-on-1 basketball with weight classes and tournament-style competition.",
+    images: ["/league1v1.png"],
   },
   robots: {
     index: true,
