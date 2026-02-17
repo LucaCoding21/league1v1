@@ -1,0 +1,395 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-dark: #111111;
+  --color-light: #FFFFFF;
+  --color-accent: #E63946;
+  --color-surface: #F5F5F5;
+  --color-surface-2: #EBEBEB;
+  --color-muted: #666666;
+  --color-border: #222222;
+
+  /* Light section palette */
+  --color-cream: #F0EDE8;
+  --color-cream-dark: #E2DDD6;
+  --color-ink: #1A1A1A;
+  --color-ink-muted: #6B6560;
+  --color-ink-light: #A39E98;
+
+  --font-display: var(--font-anton);
+  --font-body: var(--font-geist-sans);
+}
+
+/* ========================================
+   BASE LAYER
+   ======================================== */
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Lenis smooth scroll base styles */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+/* ========================================
+   COMPONENT LAYER
+   ======================================== */
+
+@layer components {
+  /* Grain overlay */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: -200%;
+    width: 400%;
+    height: 400%;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    animation: grain 8s steps(10) infinite;
+  }
+
+  /* Hero video gradient */
+  .video-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(17, 17, 17, 0.4) 0%,
+      rgba(17, 17, 17, 0.15) 35%,
+      rgba(17, 17, 17, 0.15) 60%,
+      rgba(17, 17, 17, 0.7) 85%,
+      rgba(17, 17, 17, 1) 100%
+    );
+  }
+
+  /* Section label */
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+  }
+
+  /* CTA button — solid black fill, white text */
+  .cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 3px solid var(--color-dark);
+    background: var(--color-dark);
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.4s ease, color 0.4s ease, background 0.4s ease;
+  }
+
+  .cta-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+    z-index: -1;
+  }
+
+  .cta-button:hover {
+    border-color: var(--color-accent);
+    color: #fff;
+    background: transparent;
+  }
+
+  .cta-button:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* CTA button — light variant for dark sections */
+  .cta-button-light {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 3px solid rgba(255,255,255,0.3);
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.4s ease, color 0.4s ease;
+  }
+
+  .cta-button-light::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+    z-index: -1;
+  }
+
+  .cta-button-light:hover {
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+
+  .cta-button-light:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* Text split helpers */
+  .line-wrapper {
+    overflow: hidden;
+    display: block;
+  }
+
+  .line-inner {
+    display: block;
+  }
+
+  /* Weight class badge */
+  .weight-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 2px solid var(--color-dark);
+    background: var(--color-dark);
+  }
+
+  /* Player card glow */
+  .card-glow {
+    box-shadow: 0 0 0px rgba(230, 57, 70, 0),
+                0 0 0px rgba(230, 57, 70, 0);
+    transition: box-shadow 0.5s ease;
+  }
+
+  .card-glow:hover {
+    box-shadow: 0 0 30px rgba(230, 57, 70, 0.15),
+                0 0 80px rgba(230, 57, 70, 0.05);
+  }
+
+  /* VS glow */
+  .vs-glow {
+    text-shadow:
+      0 0 20px rgba(230, 57, 70, 0.6),
+      0 0 60px rgba(230, 57, 70, 0.3),
+      0 0 100px rgba(230, 57, 70, 0.15);
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+
+  /* Media hover overlay */
+  .media-card-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(17, 17, 17, 0.9) 0%,
+      rgba(17, 17, 17, 0.3) 50%,
+      transparent 100%
+    );
+  }
+
+  /* Countdown digit box */
+  .countdown-digit {
+    background: white;
+    border: 2px solid var(--color-cream-dark);
+    border-top: 2px solid var(--color-accent);
+  }
+
+  /* CTA button — dark variant for light sections */
+  .cta-button-dark {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    border: 3px solid var(--color-cream-dark);
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.4s ease, color 0.4s ease;
+  }
+
+  .cta-button-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+    z-index: -1;
+  }
+
+  .cta-button-dark:hover {
+    border-color: var(--color-accent);
+    color: white;
+  }
+
+  .cta-button-dark:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* Vote button */
+  .vote-card {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 3px solid var(--color-cream-dark);
+    transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+  }
+
+  .vote-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(230, 57, 70, 0.12);
+  }
+
+  .vote-card.voted {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent);
+  }
+
+  /* Stat bar */
+  .stat-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-cream-dark);
+    overflow: hidden;
+  }
+
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--color-accent);
+    transition: width 1s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  /* ——— Showdown section ——— */
+  .cd-panel-a,
+  .cd-panel-b {
+    will-change: transform;
+  }
+
+  .cd-divider {
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .cd-stat-fill {
+    transition: width 1.2s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .cd-vote-card {
+    cursor: pointer;
+    transition: border-color 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .cd-vote-card:not(:disabled):hover {
+    box-shadow: 0 0 40px rgba(230, 57, 70, 0.12),
+                0 0 80px rgba(230, 57, 70, 0.05);
+  }
+
+  @supports (-webkit-text-stroke: 1px white) {
+    .cd-title-stroke {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--color-light);
+    }
+  }
+
+  @supports not (-webkit-text-stroke: 1px white) {
+    .cd-title-stroke {
+      color: var(--color-light);
+      opacity: 0.15;
+    }
+  }
+}
+
+/* ========================================
+   KEYFRAMES (unlayered is fine)
+   ======================================== */
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
