@@ -23,7 +23,7 @@ const PILLARS = [
     number: "03",
     title: "ONE WINNER",
     description:
-      "Every matchup ends with someone walking off the court crowned. No draws. No participation trophies.",
+      "Every matchup ends with someone walking off the court crowned. No participation trophies.",
   },
 ];
 
@@ -320,8 +320,8 @@ export default function About() {
             style={{ fontSize: "clamp(0.9rem, 1.2vw, 1.1rem)" }}
           >
             League 1V1 is basketball stripped to its purest form. Weight classes.
-            Tournament brackets. No screens to hide behind, no teammates to
-            blame. Just you, your handles, and the truth.
+            No screens to hide behind, no teammates to blame. Just you, your
+            handles, and the truth.
           </p>
         </div>
 

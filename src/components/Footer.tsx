@@ -7,10 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "#" },
-  { label: "YouTube", href: "#" },
-  { label: "TikTok", href: "#" },
-  { label: "X", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/league1v1/" },
+  { label: "YouTube", href: "https://www.youtube.com/@Abrahamtwins" },
 ];
 
 export default function Footer() {

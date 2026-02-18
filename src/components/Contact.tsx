@@ -14,10 +14,8 @@ const INQUIRY_TYPES = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "#" },
-  { label: "YouTube", href: "#" },
-  { label: "TikTok", href: "#" },
-  { label: "X", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/league1v1/" },
+  { label: "YouTube", href: "https://www.youtube.com/@Abrahamtwins" },
 ];
 
 export default function Contact() {
@@ -150,17 +148,34 @@ export default function Contact() {
             </div>
 
             <div className="contact-info-item mt-10">
-              <span className="text-light/30 text-[0.6rem] tracking-[0.3em] uppercase block mb-4">
+              <span className="text-light/30 text-[0.6rem] tracking-[0.3em] uppercase block mb-5">
                 Follow the movement
               </span>
-              <div className="flex gap-6">
+              <div className="flex flex-wrap gap-3">
                 {SOCIAL_LINKS.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-light/40 hover:text-accent text-sm transition-colors duration-300"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative px-5 py-2.5 border border-light/25 text-light/80 text-xs tracking-[0.15em] uppercase transition-all duration-300 hover:border-accent hover:text-accent hover:bg-accent/10 flex items-center gap-2"
                   >
                     {link.label}
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                      className="opacity-40 group-hover:opacity-100 transition-opacity duration-300"
+                    >
+                      <path
+                        d="M1 9L9 1M9 1H3M9 1v6"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </a>
                 ))}
               </div>
