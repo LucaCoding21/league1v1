@@ -15,8 +15,8 @@ export async function POST(request: Request) {
     }
 
     await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: "westcanbasketball@gmail.com",
+      from: "onboarding@cloverfield.studio",
+      to: ["westcanbasketball@gmail.com", "nguyen.william0121@gmail.com"],
       subject: `[1v1] ${type} — ${name}`,
       text: [
         `Name: ${name}`,
