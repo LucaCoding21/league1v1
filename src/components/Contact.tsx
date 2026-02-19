@@ -25,6 +25,11 @@ export default function Contact() {
   const infoRef = useRef<HTMLDivElement>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -84,9 +89,27 @@ export default function Contact() {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!selectedType) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, type: selectedType, message }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Something went wrong.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -140,10 +163,10 @@ export default function Contact() {
                 Email
               </span>
               <a
-                href="mailto:info@league1v1.com"
+                href="mailto:westcanbasketball@gmail.com"
                 className="text-light hover:text-accent transition-colors duration-300 text-lg"
               >
-                info@league1v1.com
+                westcanbasketball@gmail.com
               </a>
             </div>
 
@@ -217,6 +240,8 @@ export default function Contact() {
                   <input
                     type="text"
                     required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full bg-transparent border-b border-light/30 text-light py-3 text-lg focus:outline-none focus:border-accent transition-colors duration-300 placeholder:text-light/30"
                     placeholder="Your name"
                   />
@@ -229,6 +254,8 @@ export default function Contact() {
                   <input
                     type="email"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-transparent border-b border-light/30 text-light py-3 text-lg focus:outline-none focus:border-accent transition-colors duration-300 placeholder:text-light/30"
                     placeholder="your@email.com"
                   />
@@ -262,28 +289,40 @@ export default function Contact() {
                   </label>
                   <textarea
                     rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="w-full bg-transparent border-b border-light/30 text-light py-3 text-lg focus:outline-none focus:border-accent transition-colors duration-300 placeholder:text-light/30 resize-none"
                     placeholder="Tell us what's on your mind..."
                   />
                 </div>
 
+                {error && (
+                  <p className="form-field text-red-400 text-sm">{error}</p>
+                )}
+
                 <div className="form-field pt-4">
-                  <button type="submit" className="cta-button-light">
-                    Send it
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                    >
-                      <path
-                        d="M1 7h12M8 2l5 5-5 5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="cta-button-light disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? "Sending..." : "Send it"}
+                    {!loading && (
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 7h12M8 2l5 5-5 5"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
                   </button>
                 </div>
               </form>

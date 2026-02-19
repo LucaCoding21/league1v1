@@ -1,0 +1,16 @@
+{
+  "name": "League 1V1",
+  "short_name": "League 1V1",
+  "description": "1-on-1 basketball with weight classes and tournament-style competition.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
