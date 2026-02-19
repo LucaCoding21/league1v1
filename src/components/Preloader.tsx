@@ -18,7 +18,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const tensRef = useRef<HTMLDivElement>(null);
   const onesRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  const brandLineRef = useRef<HTMLDivElement>(null);
+
   const brandSubRef = useRef<HTMLDivElement>(null);
 
   const stableOnComplete = useCallback(onComplete, [onComplete]);
@@ -53,12 +53,6 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         ease: "power3.out",
       }
     )
-      .fromTo(
-        brandLineRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.45, ease: "power3.inOut" },
-        "-=0.2"
-      )
       .fromTo(
         brandSubRef.current,
         { y: 12, opacity: 0 },
@@ -169,15 +163,11 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       <div
         ref={leftCurtainRef}
         className="absolute top-0 left-0 w-1/2 h-full bg-[#111111]"
-      >
-        <div className="absolute top-0 right-0 w-[1px] h-full bg-accent/20" />
-      </div>
+      />
       <div
         ref={rightCurtainRef}
         className="absolute top-0 right-0 w-1/2 h-full bg-[#111111]"
-      >
-        <div className="absolute top-0 left-0 w-[1px] h-full bg-accent/20" />
-      </div>
+      />
 
       {/* Flash */}
       <div className="preloader-flash absolute inset-0 bg-white opacity-0 pointer-events-none z-[5]" />
@@ -201,11 +191,6 @@ export default function Preloader({ onComplete }: PreloaderProps) {
               </span>
             ))}
           </div>
-          <div
-            ref={brandLineRef}
-            className="w-20 h-[3px] bg-accent my-3 origin-center"
-            style={{ transform: "scaleX(0)" }}
-          />
           <div ref={brandSubRef} style={{ opacity: 0 }}>
             <span
               className="font-display text-light/50"
