@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://league1v1.vercel.app/sitemap.xml",
+    sitemap: "https://league1v1.com/sitemap.xml",
   };
 }

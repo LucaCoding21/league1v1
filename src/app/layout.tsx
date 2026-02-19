@@ -24,9 +24,12 @@ export const metadata: Metadata = {
   description:
     "League 1V1 — 1-on-1 basketball with weight classes and tournament-style competition. The ultimate proving ground.",
   keywords: ["basketball", "1v1", "league", "tournament", "combat", "sports"],
-  metadataBase: new URL("https://league1v1.vercel.app"),
+  metadataBase: new URL("https://league1v1.com"),
   alternates: {
     canonical: "/",
+    languages: {
+      "en-CA": "https://league1v1.ca",
+    },
   },
   icons: {
     icon: "/favicon.ico",
@@ -40,7 +43,7 @@ export const metadata: Metadata = {
     siteName: "League 1V1",
     type: "website",
     locale: "en_US",
-    url: "https://league1v1.vercel.app",
+    url: "https://league1v1.com",
     images: [
       {
         url: "/league1v1.jpg",
@@ -74,12 +77,12 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SportsOrganization",
   name: "League 1V1",
-  url: "https://league1v1.vercel.app",
+  url: "https://league1v1.com",
   description:
     "1-on-1 basketball with weight classes and tournament-style competition. The ultimate proving ground.",
   sport: "Basketball",
-  logo: "https://league1v1.vercel.app/favicon.ico",
-  image: "https://league1v1.vercel.app/league1v1.jpg",
+  logo: "https://league1v1.com/favicon.ico",
+  image: "https://league1v1.com/league1v1.jpg",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Vancouver",
