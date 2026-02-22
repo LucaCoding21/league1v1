@@ -58,6 +58,28 @@ export default function Hero({ preloaderDone }: HeroProps) {
     };
   }, [preloaderDone]);
 
+  // Auto-recover video if browser pauses it (tab switching, background throttling, etc.)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const resume = () => {
+      if (video.paused) video.play().catch(() => {});
+    };
+
+    const onVisibilityChange = () => {
+      if (!document.hidden) resume();
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    video.addEventListener("pause", resume);
+
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      video.removeEventListener("pause", resume);
+    };
+  }, []);
+
   // Scroll parallax
   useEffect(() => {
     if (!sectionRef.current || !videoRef.current) return;
