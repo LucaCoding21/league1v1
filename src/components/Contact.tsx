@@ -163,10 +163,10 @@ export default function Contact() {
                 Email
               </span>
               <a
-                href="mailto:westcanbasketball@gmail.com"
+                href="mailto:info@westcanbasketball.ca"
                 className="text-light hover:text-accent transition-colors duration-300 text-lg"
               >
-                westcanbasketball@gmail.com
+                info@westcanbasketball.ca
               </a>
             </div>
 
