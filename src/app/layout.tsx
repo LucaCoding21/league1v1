@@ -1,16 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Anton } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const anton = Anton({
   weight: "400",
   variable: "--font-anton",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -103,17 +106,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-HPJSC9XB77" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-HPJSC9XB77');
-            `,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -124,6 +116,18 @@ export default function RootLayout({
       >
         <div className="grain" />
         {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-HPJSC9XB77"
+          strategy="lazyOnload"
+        />
+        <Script id="gtag-init" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-HPJSC9XB77');
+          `}
+        </Script>
       </body>
     </html>
   );

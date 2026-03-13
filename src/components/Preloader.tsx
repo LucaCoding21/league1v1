@@ -26,11 +26,14 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
+    const isMobile = window.innerWidth < 768;
+    const speed = isMobile ? 0.5 : 1;
+
     let prevOnes = -1;
     let prevTens = -1;
     let prevHundreds = -1;
 
-    const tl = gsap.timeline({
+    const tl = gsap.timeline({ timeScale: speed,
       onComplete: () => {
         document.body.style.overflow = "";
         if (containerRef.current)

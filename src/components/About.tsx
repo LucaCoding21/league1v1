@@ -32,9 +32,34 @@ export default function About() {
   const videoSectionRef = useRef<HTMLDivElement>(null);
   const video1ContainerRef = useRef<HTMLDivElement>(null);
   const video2ContainerRef = useRef<HTMLDivElement>(null);
+  const video1Ref = useRef<HTMLVideoElement>(null);
+  const video2Ref = useRef<HTMLVideoElement>(null);
   const manifestoRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const pillarsRef = useRef<HTMLDivElement>(null);
+
+  // Lazy-load videos when section scrolls into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const video = entry.target as HTMLVideoElement;
+          video.querySelectorAll("source[data-src]").forEach((source) => {
+            const s = source as HTMLSourceElement;
+            s.src = s.dataset.src!;
+          });
+          video.load();
+          video.play().catch(() => {});
+          observer.unobserve(video);
+        });
+      },
+      { rootMargin: "200px" }
+    );
+    if (video1Ref.current) observer.observe(video1Ref.current);
+    if (video2Ref.current) observer.observe(video2Ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -214,14 +239,15 @@ export default function About() {
             className="relative overflow-hidden aspect-[3/2] md:aspect-[4/5]"
           >
             <video
+              ref={video1Ref}
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               className="absolute inset-0 w-full h-full object-cover"
             >
-              <source src="/highlight1.mp4" type="video/mp4" />
+              <source data-src="/highlight1.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-b from-dark/70 via-dark/10 to-transparent" />
             <div className="video-label absolute top-8 left-8 md:top-12 md:left-12">
@@ -252,14 +278,15 @@ export default function About() {
             className="relative overflow-hidden aspect-[3/2] md:aspect-[4/5]"
           >
             <video
+              ref={video2Ref}
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               className="absolute inset-0 w-full h-full object-cover"
             >
-              <source src="/highlight2.mp4" type="video/mp4" />
+              <source data-src="/highlight2.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-b from-dark/70 via-dark/10 to-transparent" />
             <div className="video-label absolute top-8 right-8 md:top-12 md:right-12 text-right">
