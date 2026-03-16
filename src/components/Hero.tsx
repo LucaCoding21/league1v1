@@ -123,8 +123,11 @@ export default function Hero({ preloaderDone }: HeroProps) {
         muted
         loop
         playsInline
+        preload="auto"
+        poster="/hero-poster.jpg"
         className="absolute inset-0 w-full h-full object-cover scale-100"
       >
+        <source src="/hero-video.webm" type='video/webm; codecs="av01.0.05M.08"' />
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
 
